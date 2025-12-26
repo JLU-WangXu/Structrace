@@ -1,0 +1,85 @@
+# This file was created Sun Nov 16 18:50:28 2025
+# Created by:
+#                       :-) GROMACS - gmx rmsf, 2024.6 (-:
+# 
+# Executable:   /root/autodl-tmp/Gromacs/bin/gmx
+# Data prefix:  /root/autodl-tmp/Gromacs
+# Working dir:  /root/gromacs_simulation/6mrr_watermarked_re_re
+# Command line:
+#   gmx rmsf -s md.tpr -f md.xtc -o rmsf.xvg -res
+# gmx rmsf is part of G R O M A C S:
+#
+# Georgetown Riga Oslo Madrid Amsterdam Chisinau Stockholm
+#
+@    title "RMS fluctuation"
+@    xaxis  label "Residue"
+@    yaxis  label "(nm)"
+@TYPE xy
+    1   0.6018
+    2   0.3295
+    3   0.1844
+    4   0.1241
+    5   0.1358
+    6   0.1227
+    7   0.0897
+    8   0.0813
+    9   0.0855
+   10   0.0747
+   11   0.0755
+   12   0.0798
+   13   0.0701
+   14   0.0840
+   15   0.0918
+   16   0.0748
+   17   0.0817
+   18   0.1060
+   19   0.1020
+   20   0.0734
+   21   0.1165
+   22   0.0879
+   23   0.1333
+   24   0.1043
+   25   0.0853
+   26   0.0910
+   27   0.1294
+   28   0.1100
+   29   0.1623
+   30   0.1957
+   31   0.2233
+   32   0.2353
+   33   0.1554
+   34   0.1352
+   35   0.0991
+   36   0.0800
+   37   0.0634
+   38   0.0598
+   39   0.0828
+   40   0.1016
+   41   0.0882
+   42   0.0741
+   43   0.0924
+   44   0.0842
+   45   0.0664
+   46   0.0678
+   47   0.0766
+   48   0.0708
+   49   0.0608
+   50   0.0678
+   51   0.0764
+   52   0.0735
+   53   0.0693
+   54   0.0810
+   55   0.0948
+   56   0.0924
+   57   0.0897
+   58   0.1086
+   59   0.1192
+   60   0.1276
+   61   0.1149
+   62   0.1503
+   63   0.1184
+   64   0.1182
+   65   0.0818
+   66   0.0824
+   67   0.0966
+   68   0.1403
