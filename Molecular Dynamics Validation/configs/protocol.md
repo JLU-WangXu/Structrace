@@ -9,24 +9,24 @@
 
 ## 1. System Setup and Topology Generation
 
-Molecular dynamics (MD) simulations were performed to validate the dynamic stability and structural integrity of the watermarked biomolecules. [cite_start]The simulation systems were prepared using the **GROMACS v2024.6** software package.
+Molecular dynamics (MD) simulations were performed to validate the dynamic stability and structural integrity of the watermarked biomolecules. The simulation systems were prepared using the **GROMACS v2024.6** software package.
 
 ### 1.1. Topology Preparation
-[cite_start]The atomic coordinates for the target structures—including the natural membrane transporter (**8HFE**), the de novo designed protein (**6MRR**), and the AI-generated binder (**8VC8**)—were processed using the `pdb2gmx` module.
-* [cite_start]**Force Field:** The **AMBER99SB-ILDN** force field was employed to describe protein parameters.
-* [cite_start]**Water Model:** The **TIP3P** water model was selected for solvation.
+The atomic coordinates for the target structures—including the natural membrane transporter (**8HFE**), the de novo designed protein (**6MRR**), and the AI-generated binder (**8VC8**)—were processed using the `pdb2gmx` module.
+* **Force Field:** The **AMBER99SB-ILDN** force field was employed to describe protein parameters.
+* **Water Model:** The **TIP3P** water model was selected for solvation.
 
 ### 1.2. Solvation and Ionization
-* [cite_start]**Simulation Box:** Structures were centered in a **cubic** box with periodic boundary conditions applied in all directions.
-* [cite_start]**Neutralization:** The system charge was neutralized by the addition of sodium ($Na^+$) and chloride ($Cl^-$) ions to simulate physiological conditions.
+* **Simulation Box:** Structures were centered in a **cubic** box with periodic boundary conditions applied in all directions.
+* **Neutralization:** The system charge was neutralized by the addition of sodium ($Na^+$) and chloride ($Cl^-$) ions to simulate physiological conditions.
 
 ## 2. Energy Minimization
 
-[cite_start]To remove steric clashes and relax the high-energy contacts inherent in the initial coordinates, the system underwent energy minimization using the **Steepest Descent** algorithm. Minimization was considered converged when the maximum force ($F_{max}$) dropped below the defined threshold (default: $1000 \, kJ \cdot mol^{-1} \cdot nm^{-1}$).
+To remove steric clashes and relax the high-energy contacts inherent in the initial coordinates, the system underwent energy minimization using the **Steepest Descent** algorithm. Minimization was considered converged when the maximum force ($F_{max}$) dropped below the defined threshold (default: $100 \, kJ \cdot mol^{-1} \cdot nm^{-1}$).
 
 ## 3. Equilibration Protocol
 
-[cite_start]Following minimization, the systems were equilibrated in two phases to stabilize temperature and pressure.
+Following minimization, the systems were equilibrated in two phases to stabilize temperature and pressure.
 
 ### 3.1. NVT Equilibration (Canonical Ensemble)
 The system was heated to the target temperature (300 K) under a constant number of particles, volume, and temperature (NVT).
@@ -42,14 +42,14 @@ The system was subsequently equilibrated under constant number of particles, pre
 
 Unrestrained production MD runs were conducted for both the original (wild-type) and watermarked structures to allow for direct comparative analysis.
 
-* [cite_start]**Duration:** **50 ns** per trajectory for each system.
+* **Duration:** **50 ns** per trajectory for each system.
 * **Integration:** The equations of motion were integrated using the leap-frog algorithm with a time step of 2 fs.
 * **Constraints:** All bonds involving hydrogen atoms were constrained using the LINCS algorithm.
 * **Electrostatics:** Long-range electrostatic interactions were treated using the Particle Mesh Ewald (PME) method.
 
 ## 5. Trajectory Analysis
 
-[cite_start]The resulting trajectories were analyzed to quantify structural deviations and flexibility changes.
+The resulting trajectories were analyzed to quantify structural deviations and flexibility changes.
 
 * **Global Stability (RMSD):** The Backbone Root Mean Square Deviation (RMSD) was calculated relative to the starting structure to assess global structural stability over the 50 ns simulation.
 * **Local Flexibility (RMSF):** Per-residue Root Mean Square Fluctuation (RMSF) was computed to localize potential changes in flexibility induced by the watermarking process.
