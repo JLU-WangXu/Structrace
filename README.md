@@ -78,7 +78,7 @@ To ensure reproducibility of our stability results, we provide the exact molecul
 * **Ions:** Neutralized with 0.15 M NaCl ($Na^+/Cl^-$)
 * **Ensembles:** NVT (V-rescale) & NPT (Parrinello-Rahman)
 * **Duration:** 50 ns production run per system
-
+The detailed protocol is provided in \Molecular Dynamics Validation\configs
 ---
 
 ## 🛠️ Installation & Usage
@@ -88,34 +88,9 @@ To ensure reproducibility of our stability results, we provide the exact molecul
 * Numpy, Biopython, Scipy
 * DSSP (for secondary structure assignment)
 
-### Quick Start
-
-bash
 # Clone the repository
 git clone [https://github.com/YourUsername/StrucTrace.git](https://github.com/YourUsername/StrucTrace.git)
 cd StrucTrace
-
-# Install dependencies
-pip install -r requirements.txt
-
-```
-
-### Python Example
-
-```python
-from structrace import Watermarker
-
-# 1. Initialize
-wm = Watermarker(input_pdb="inputs/8HFE.pdb", output_pdb="outputs/8HFE_trace.pdb")
-
-# 2. Embed Data (e.g., Copyright Info)
-wm.embed(message="Property of Tsinghua University | Author: Xu Wang", strength=0.5)
-
-# 3. Decode & Verify
-decoded_msg = wm.decode(target_pdb="outputs/8HFE_trace.pdb", reference_pdb="inputs/8HFE.pdb")
-print(f"Recovered Message: {decoded_msg}")
-
-```
 
 ---
 
@@ -127,7 +102,7 @@ If you use StrucTrace in your research, please cite our paper:
 @article{Wang2025StrucTrace,
   title={StrucTrace: A universal Fourier watermark for traceable biomolecular structures},
   author={Wang, Xu and Wang, Chi and Huang, Tin-Yeh and Wang, Yiquan and Yuan, Yafei},
-  journal={School of Life Sciences, Tsinghua University},
+  journal={Nature Structural & Molecular Biology, Technical Report},
   year={2025},
   note={Under Review}
 }
@@ -140,6 +115,3 @@ If you use StrucTrace in your research, please cite our paper:
 
 This project is licensed under the **MIT License** - see the [LICENSE](https://www.google.com/search?q=LICENSE) file for details.
 
-```
-
-```
