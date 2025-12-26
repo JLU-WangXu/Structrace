@@ -1,16 +1,11 @@
-这是根据您所有要求（删除引用、修复符号、精简MD细节、补充安装引用信息、插入图片）整合的最终版 `README.md`。
-
-您可以直接复制下方代码块中的全部内容。
-
-```markdown
 # StrucTrace: A Universal Fourier Watermark for Traceable Biomolecular Structures
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/release/python-380/)
 [![GROMACS](https://img.shields.io/badge/GROMACS-2024.6-green.svg)](https://www.gromacs.org/)
 
-**Authors:** Xu Wang¹, Chi Wang¹, Tin-Yeh Huang¹, Yiquan Wang¹, Yafei Yuan*¹
-**Affiliation:** ¹School of Life Sciences, Tsinghua University
+**Authors:** Xu Wang, Chi Wang, Tin-Yeh Huang, Yiquan Wang, Yafei Yuan*
+
 
 ---
 
@@ -95,7 +90,7 @@ To ensure reproducibility of our stability results, we provide the exact molecul
 
 ### Quick Start
 
-```bash
+bash
 # Clone the repository
 git clone [https://github.com/YourUsername/StrucTrace.git](https://github.com/YourUsername/StrucTrace.git)
 cd StrucTrace
