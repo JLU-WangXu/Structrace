@@ -78,6 +78,7 @@ To ensure reproducibility of our stability results, we provide the exact molecul
 * **Ions:** Neutralized with 0.15 M NaCl ($Na^+/Cl^-$)
 * **Ensembles:** NVT (V-rescale) & NPT (Parrinello-Rahman)
 * **Duration:** 50 ns production run per system
+
 The detailed protocol is provided in \Molecular Dynamics Validation\configs
 ---
 
