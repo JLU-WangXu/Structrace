@@ -22,7 +22,7 @@ The atomic coordinates for the target structures—including the natural membran
 
 ## 2. Energy Minimization
 
-To remove steric clashes and relax the high-energy contacts inherent in the initial coordinates, the system underwent energy minimization using the **Steepest Descent** algorithm. Minimization was considered converged when the maximum force ($F_{max}$) dropped below the defined threshold (default: $100 \, kJ \cdot mol^{-1} \cdot nm^{-1}$).
+To remove steric clashes and relax the high-energy contacts inherent in the initial coordinates, the system underwent energy minimization using the **Steepest Descent** algorithm. Minimization was considered converged when the maximum force ($F_{max}$) dropped below the defined threshold (default: $100 kJ \cdot mol^{-1} \cdot nm^{-1}$).
 
 ## 3. Equilibration Protocol
 
