@@ -1,0 +1,20 @@
+Interpolated low-amplitude global Gaussian coordinate noise on all protein ATOM records. Noise is sampled independently per coordinate from N(0, sigma^2); sigma values follow the local coordinate distortion experiment.
+
+6MRR sigma=0.001 A: n=50 BitAcc_mean=100.000% BitAcc_min=100.000% BitAcc_max=100.000% exact=50/50 clean_to_noisy_CA_RMSD_mean=0.0018 A
+6MRR sigma=0.0012 A: n=50 BitAcc_mean=99.964% BitAcc_min=98.214% BitAcc_max=100.000% exact=49/50 clean_to_noisy_CA_RMSD_mean=0.0021 A
+6MRR sigma=0.0014 A: n=50 BitAcc_mean=99.643% BitAcc_min=96.429% BitAcc_max=100.000% exact=42/50 clean_to_noisy_CA_RMSD_mean=0.0024 A
+6MRR sigma=0.0016 A: n=50 BitAcc_mean=99.179% BitAcc_min=94.643% BitAcc_max=100.000% exact=32/50 clean_to_noisy_CA_RMSD_mean=0.0027 A
+6MRR sigma=0.0018 A: n=50 BitAcc_mean=99.107% BitAcc_min=94.643% BitAcc_max=100.000% exact=30/50 clean_to_noisy_CA_RMSD_mean=0.0031 A
+6MRR sigma=0.002 A: n=50 BitAcc_mean=98.107% BitAcc_min=94.643% BitAcc_max=100.000% exact=16/50 clean_to_noisy_CA_RMSD_mean=0.0034 A
+8HFE sigma=0.001 A: n=50 BitAcc_mean=100.000% BitAcc_min=100.000% BitAcc_max=100.000% exact=50/50 clean_to_noisy_CA_RMSD_mean=0.0017 A
+8HFE sigma=0.0012 A: n=50 BitAcc_mean=99.929% BitAcc_min=98.214% BitAcc_max=100.000% exact=48/50 clean_to_noisy_CA_RMSD_mean=0.0021 A
+8HFE sigma=0.0014 A: n=50 BitAcc_mean=99.750% BitAcc_min=98.214% BitAcc_max=100.000% exact=43/50 clean_to_noisy_CA_RMSD_mean=0.0024 A
+8HFE sigma=0.0016 A: n=50 BitAcc_mean=99.714% BitAcc_min=98.214% BitAcc_max=100.000% exact=42/50 clean_to_noisy_CA_RMSD_mean=0.0028 A
+8HFE sigma=0.0018 A: n=50 BitAcc_mean=98.786% BitAcc_min=94.643% BitAcc_max=100.000% exact=22/50 clean_to_noisy_CA_RMSD_mean=0.0031 A
+8HFE sigma=0.002 A: n=50 BitAcc_mean=97.893% BitAcc_min=89.286% BitAcc_max=100.000% exact=17/50 clean_to_noisy_CA_RMSD_mean=0.0035 A
+8VC8 sigma=0.001 A: n=50 BitAcc_mean=100.000% BitAcc_min=100.000% BitAcc_max=100.000% exact=50/50 clean_to_noisy_CA_RMSD_mean=0.0017 A
+8VC8 sigma=0.0012 A: n=50 BitAcc_mean=99.964% BitAcc_min=98.214% BitAcc_max=100.000% exact=49/50 clean_to_noisy_CA_RMSD_mean=0.0021 A
+8VC8 sigma=0.0014 A: n=50 BitAcc_mean=99.857% BitAcc_min=98.214% BitAcc_max=100.000% exact=46/50 clean_to_noisy_CA_RMSD_mean=0.0024 A
+8VC8 sigma=0.0016 A: n=50 BitAcc_mean=99.179% BitAcc_min=96.429% BitAcc_max=100.000% exact=32/50 clean_to_noisy_CA_RMSD_mean=0.0028 A
+8VC8 sigma=0.0018 A: n=50 BitAcc_mean=98.750% BitAcc_min=94.643% BitAcc_max=100.000% exact=24/50 clean_to_noisy_CA_RMSD_mean=0.0031 A
+8VC8 sigma=0.002 A: n=50 BitAcc_mean=97.786% BitAcc_min=92.857% BitAcc_max=100.000% exact=13/50 clean_to_noisy_CA_RMSD_mean=0.0034 A

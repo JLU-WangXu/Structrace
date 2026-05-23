@@ -1,0 +1,4 @@
+case_id,test,p_value,significance,nonselected_mean_bitacc,selected_mean_bitacc,nonselected_median_bitacc,selected_median_bitacc
+6MRR,two-sided permutation test on mean BitAcc difference,4.999750012499375e-05,***,100.0,55.92857142857142,100.0,57.14285714285714
+8HFE,two-sided permutation test on mean BitAcc difference,4.999750012499375e-05,***,100.0,56.42857142857144,100.0,55.35714285714286
+8VC8,two-sided permutation test on mean BitAcc difference,4.999750012499375e-05,***,100.0,56.55357142857142,100.0,55.35714285714286

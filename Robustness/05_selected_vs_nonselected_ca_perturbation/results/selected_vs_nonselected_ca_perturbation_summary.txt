@@ -1,0 +1,10 @@
+Random Gaussian perturbation of watermark-bearing selected C-alpha atoms versus non-selected C-alpha atoms. Each repeat perturbs the same number of C-alpha atoms with identical sigma.
+
+sigma=0.05 A; target_ca_count=12; repeats=100; message='npj SB'; start_freq=5
+
+6MRR nonselected_CA: n=100 BitAcc_median=100.000% BitAcc_mean=100.000% IQR=100.000-100.000% min=100.000% max=100.000% exact=100/100
+6MRR selected_CA: n=100 BitAcc_median=57.143% BitAcc_mean=55.929% IQR=51.786-60.714% min=37.500% max=71.429% exact=0/100
+8HFE nonselected_CA: n=100 BitAcc_median=100.000% BitAcc_mean=100.000% IQR=100.000-100.000% min=100.000% max=100.000% exact=100/100
+8HFE selected_CA: n=100 BitAcc_median=55.357% BitAcc_mean=56.429% IQR=51.786-60.714% min=39.286% max=71.429% exact=0/100
+8VC8 nonselected_CA: n=100 BitAcc_median=100.000% BitAcc_mean=100.000% IQR=100.000-100.000% min=100.000% max=100.000% exact=100/100
+8VC8 selected_CA: n=100 BitAcc_median=55.357% BitAcc_mean=56.554% IQR=51.786-60.714% min=42.857% max=75.000% exact=0/100

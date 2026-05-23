@@ -1,0 +1,14 @@
+Deterministic decimal rounding of all protein ATOM coordinates in the watermarked PDB files. The original files are standard PDB-style 3-decimal coordinate files; 3 decimals therefore serve as the baseline precision.
+
+6MRR decimals=3: BitAcc=100.000% BER=0.000% exact=True clean_to_rounded_CA_RMSD=0.00000 A
+6MRR decimals=2: BitAcc=87.500% BER=12.500% exact=False clean_to_rounded_CA_RMSD=0.00503 A
+6MRR decimals=1: BitAcc=48.214% BER=51.786% exact=False clean_to_rounded_CA_RMSD=0.04917 A
+6MRR decimals=0: BitAcc=51.786% BER=48.214% exact=False clean_to_rounded_CA_RMSD=0.51749 A
+8HFE decimals=3: BitAcc=100.000% BER=0.000% exact=True clean_to_rounded_CA_RMSD=0.00000 A
+8HFE decimals=2: BitAcc=92.857% BER=7.143% exact=False clean_to_rounded_CA_RMSD=0.00500 A
+8HFE decimals=1: BitAcc=48.214% BER=51.786% exact=False clean_to_rounded_CA_RMSD=0.05052 A
+8HFE decimals=0: BitAcc=53.571% BER=46.429% exact=False clean_to_rounded_CA_RMSD=0.49449 A
+8VC8 decimals=3: BitAcc=100.000% BER=0.000% exact=True clean_to_rounded_CA_RMSD=0.00000 A
+8VC8 decimals=2: BitAcc=94.643% BER=5.357% exact=False clean_to_rounded_CA_RMSD=0.00506 A
+8VC8 decimals=1: BitAcc=48.214% BER=51.786% exact=False clean_to_rounded_CA_RMSD=0.04909 A
+8VC8 decimals=0: BitAcc=50.000% BER=50.000% exact=False clean_to_rounded_CA_RMSD=0.50001 A

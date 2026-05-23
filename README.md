@@ -1,119 +1,121 @@
-# StrucTrace: A Universal Fourier Watermark for Traceable Biomolecular Structures
+# StrucTrace: A universal Fourier watermark for traceable biomolecular structures
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/release/python-380/)
-[![GROMACS](https://img.shields.io/badge/GROMACS-2024.6-green.svg)](https://www.gromacs.org/)
+StrucTrace is a post-processing framework for embedding provenance information into three-dimensional biomolecular coordinate files. It was developed for traceable structural assets in generative protein design, cryo-EM and other high-value structural biology workflows, where authorship, controlled distribution and auditability must be added without compromising atomic-scale utility.
 
-**Authors:** Xu Wang, Chi Wang, Tin-Yeh Huang, Yiquan Wang, Yafei Yuan*
+Unlike generation-coupled watermarking methods, StrucTrace does not require retraining or modifying a protein design model. It selects thermodynamically flexible C-alpha regions, modulates mid-frequency Fourier coefficients with a deterministic key-guided procedure, and reconstructs a watermarked coordinate file with minimal structural deviation. Decoding is reference-guided: a query structure is aligned to a registered master structure before differential Fourier-domain recovery of the embedded payload.
 
+## Highlights
 
----
+- Universal post-processing watermarking for existing PDB files, cryo-EM models and AI-designed structures.
+- Deterministic Fourier-domain embedding in flexible C-alpha coordinate regions identified by DSSP and B-factor analysis.
+- 100% bit recovery in fidelity benchmarks, with side-chain RMSD no greater than 0.0015 Angstrom.
+- High-capacity embedding demonstrated by encoding a 6,584-bit research abstract into the human gamma-secretase cryo-EM structure.
+- Defined operating regime under rigid-body transformations, coordinate rounding, all-atom noise and local C-alpha perturbations.
+- Layered deployment model for public provenance, hardware-bound access control and digital rights management.
 
-## 📖 Overview
+## Scientific Rationale
 
-**StrucTrace** is a universal, post-processing watermarking framework designed to transform biomolecular structures (Cryo-EM, AlphaFold, RFdiffusion, etc.) into traceable, secure, and auditable digital assets.
+Generative protein design and high-resolution structure determination are making biomolecular structures increasingly valuable as digital intellectual property. Existing watermarking approaches are often tied to generation-time control and can introduce coordinate deviations on the Angstrom scale, which is problematic for docking, molecular dynamics and other precision-sensitive analyses.
 
-As AI-generated proteins become indistinguishable from natural ones, protecting digital biomolecular intellectual property (IP) is critical. Unlike generation-coupled methods that introduce notable structural deviations (RMSD ≈ 2.0 Å), **StrucTrace** leverages **Fourier-domain geometric modulation** to embed data. It achieves **100% bit recovery** while maintaining **functionally imperceptible structural perturbations** (scRMSD ≤ 0.0015 Å), ensuring atomic-level precision for downstream applications like molecular dynamics and docking.
+StrucTrace addresses this gap by decoupling provenance encoding from structure generation. The method embeds information after a structure has been produced or experimentally determined, allowing deposited archives, unpublished models and proprietary structures to be marked retrospectively. The intended use is high-fidelity, reference-guided provenance verification rather than unrestricted blind watermark detection.
 
-### Framework Workflow
-The algorithm utilizes a deterministic workflow that decouples protection from generation. It targets thermodynamically flexible regions (identified via DSSP and B-factor analysis) and modulates mid-frequency coefficients to distribute information globally without affecting the core fold.
+## Method Overview
 
-![Figure 1: Framework Overview](Figs/Figs/Fig1.png)
-> **Figure 1: The universal Fourier-domain watermarking framework.** (a) Schematic of the complete pipeline. (b) Deterministic atom selection integrates DSSP and B-factor analysis to isolate flexible $C_{\alpha}$ atoms (red). (c) FFT-based encoding modulates mid-frequency bands to embed data while preserving global structural integrity.
+![Figure 1: Universal Fourier-domain watermarking workflow](Figs/Figs/figure1.png)
 
----
+**Figure 1. Universal Fourier-domain watermarking workflow of StrucTrace.** Cartesian coordinates are extracted from an input PDB structure, provenance metadata are encoded as a binary payload, and selected coordinate vectors are transformed with FFT. Thermodynamically permissive C-alpha atoms are selected from flexible regions using secondary-structure assignment and B-factor analysis. Payload bits are embedded by modulating mid-frequency amplitudes, preserving low-frequency global fold information and high-frequency local structural detail.
 
-## 🚀 Key Features
+## Structural Fidelity and Universality
 
-* **Universal Compatibility**: Validated on diverse asset classes: Natural proteins (e.g., 8HFE), Physics-based designs (Rosetta), and AI-generated structures (RFdiffusion).
-* **Zero-Distortion**: Median $C_\alpha$-RMSD < 0.004 Å and side-chain RMSD ≤ 0.0015 Å, effectively invisible to standard structural analysis tools.
-* **Thermodynamic Stability**: Watermarked structures exhibit thermodynamic neutrality ($\Delta\Delta G \approx 0$).
-* **High Capacity**: Capable of embedding extensive metadata (e.g., >6,000 bits) into complex structures without compromising experimental resolution.
-* **Multi-Tiered Security**: Integrates public provenance tracking, hardware-bound access control, and blockchain-based DRM.
+Across large-scale benchmarks, StrucTrace introduced only negligible coordinate perturbations. Median C-alpha RMSD values remained in the 0.0005 to 0.001 Angstrom range across payload densities, and folding free energy changes remained centered near zero. In comparisons with generation-coupled watermarking methods, StrucTrace achieved 100% bit accuracy while maintaining side-chain RMSD values at or below 0.0015 Angstrom.
 
----
+The method was further evaluated on three representative structural asset classes: an experimentally resolved natural protein, a physics-based Rosetta design and an RFdiffusion-generated heme-binding protein. Fifty-nanosecond molecular dynamics simulations showed that watermarked structures retained backbone RMSD and residue-level RMSF profiles closely matching their original counterparts.
 
-## 📊 Universality & Stability Validation
+![Figure 2: Universality and structural integrity](Figs/Figs/figure2.png)
 
-To validate the universality of StrucTrace across distinct eras of structural biology, we performed **50 ns Molecular Dynamics (MD) simulations** on three representative test cases:
-1.  **Natural Protein:** Human Norepinephrine Transporter (PDB: **8HFE**).
-2.  **Physics-based Design:** *De novo* protein designed via Rosetta (PDB: **6MRR**).
-3.  **AI-Generated:** Heme-binder generated via RFdiffusion (PDB: **8VC8**).
+**Figure 2. Universality and consistent structural integrity across biomolecular asset classes.** Large-scale RMSD and folding-energy analyses indicate negligible geometric and thermodynamic perturbation. Molecular dynamics trajectories and representative structural views show close agreement between original and watermarked structures for 8HFE, 6MRR and 8VC8.
 
-![Figure 2: MD Validation](Figs/Figs/Fig2.jpg)
-> **Figure 2: Universality and consistent structural integrity.** (a) Global RMSD distributions showing negligible perturbation (<0.0015 Å). (b) Thermodynamic neutrality ($\Delta\Delta G \approx 0$). (c-e) Comparative 50 ns MD trajectories confirming that watermarked structures (blue) retain dynamic stability statistically indistinguishable from original structures (green).
+## High-Capacity Embedding
 
----
+To test payload capacity under experimentally realistic constraints, StrucTrace was applied to the 2.6 Angstrom cryo-EM structure of the human gamma-secretase complex (PDB: 6IYC). A complete research abstract containing 6,584 bits was embedded across automatically identified high-B-factor C-alpha atoms. The resulting structure retained coordinate-level agreement with the original, with a global heavy-atom RMSD of 0.017 Angstrom and 100% bit recovery.
 
-## 🧬 High-Capacity Embedding (Stress Test)
+![Figure 3: High-density information embedding](Figs/Figs/figure3.png)
 
-StrucTrace can transform PDB files into self-contained data capsules. We demonstrated this by embedding a **complete research abstract (6,584 bits)** into the 2.6 Å Cryo-EM structure of the human $\gamma$-secretase tetramer (PDB: 6IYC).
+**Figure 3. High-density information embedding in a complex cryo-EM target.** The human gamma-secretase tetramer was encoded with a full-text abstract distributed across 4,400 high-B-factor C-alpha atoms. The watermarked and original structures remain visually indistinguishable, and the measured deviation is far below the experimental resolution.
 
-![Figure 3: High Capacity](Figs/Figs/Fig3.jpg)
-> **Figure 3: High-density information embedding in a complex Cryo-EM target.** The payload (6,584 bits) was distributed across 4,400 high B-factor atoms. The resulting structure maintained a global RMSD of **0.017 Å**, two orders of magnitude smaller than the experimental resolution, with 100% bit recovery.
+## Decoding Robustness and Operating Boundary
 
----
+StrucTrace is designed for reference-guided provenance verification. Under this workflow, rigid-body translations and rotations are normalized by alignment to the registered master structure and therefore preserve exact payload recovery. Standard three-decimal PDB coordinate precision also preserves exact recovery, whereas coarser rounding progressively reduces decoding accuracy.
 
-## 🛡️ Multi-Tiered Security Ecosystem
+All-atom coordinate noise and local perturbation experiments define a more nuanced recovery boundary. Bit accuracy remains high as coordinate noise approaches 0.002 Angstrom, but exact payload recovery requires sufficient coordinate precision. Local distortions can be tolerated in many cases, whereas direct perturbation of watermark-bearing C-alpha atoms substantially reduces recovery. StrucTrace should therefore be interpreted as a high-fidelity provenance watermark with a defined white-box tamper boundary.
 
-StrucTrace establishes a scalable infrastructure for bio-asset management through a three-tiered architecture:
+![Figure 4: Watermark recovery under perturbation](Figs/Figs/figure4.png)
 
-* **Tier 1 (Public Provenance):** Lightweight signature verification using high-speed alignment tools (Foldseek).
-* **Tier 2 (Hardware-Bound Access):** AES-256 encryption bound to physical device identifiers ($ID_{machine}$) to prevent unauthorized exfiltration.
-* **Tier 3 (Digital Rights Management):** Blockchain-based tokenization for commercial licensing and immutable audit trails.
+**Figure 4. Watermark recovery under coordinate perturbations.** Rigid-body transformations preserve recovery after reference-guided alignment. Coordinate rounding, all-atom noise, local distortions and targeted C-alpha perturbations define the practical decoding boundary of the watermark.
 
-![Figure 4: Security Architecture](Figs/Figs/Fig4.png)
-> **Figure 4: Technical workflows for the multi-tiered security ecosystem.** Top: Public verification workflow. Middle: Hardware-bound mechanism (Tier 2) validating unique device IDs. Bottom: Tokenized transaction flow on the blockchain (Tier 3).
+## Security Architecture
 
----
+The coordinate-level watermark is designed to operate within a broader security architecture. Tier 1 supports public provenance verification by matching a query structure to a master database and recovering the embedded signature. Tier 2 adds hardware-bound access control through encrypted structural files and device-specific authorization. Tier 3 extends the framework to digital rights management, where structural assets can be linked to auditable licensing and transaction records.
 
-## 🔬 Reproducibility: GROMACS MD Protocol
+![Figure 5: Multi-tiered security ecosystem](Figs/Figs/figure5.png)
 
-To ensure reproducibility of our stability results, we provide the exact molecular dynamics protocol used in the paper.
+**Figure 5. Technical workflows for the multi-tiered security ecosystem.** The architecture combines public verification, AES-256 hardware-bound access control and tokenized digital rights management for biomolecular structural assets.
 
-**Simulation Parameters:**
-* **Software:** GROMACS v2024.6
-* **Force Field:** AMBER99SB-ILDN
-* **Water Model:** TIP3P (Cubic box)
-* **Ions:** Neutralized with 0.15 M NaCl ($Na^+/Cl^-$)
-* **Ensembles:** NVT (V-rescale) & NPT (Parrinello-Rahman)
-* **Duration:** 50 ns production run per system
+## Repository Contents
 
-The detailed protocol is provided in \Molecular Dynamics Validation\configs
+- `Watermark/`: watermarking examples, preliminary validation structures and hardware-bound authentication materials.
+- `High-density_embedding_stress_test/`: scripts and structures for the gamma-secretase high-capacity embedding experiment.
+- `Molecular_Dynamics_Validation/`: molecular dynamics inputs, structures, trajectories and analysis outputs for 8HFE, 6MRR and 8VC8.
+- `Rosetta_energy/`: Rosetta energy outputs used for thermodynamic stability analysis.
+- `Figs/Figs/`: revised figures corresponding to the latest manuscript version.
 
----
+## Installation
 
-## 🛠️ Installation & Usage
+Clone the repository:
 
-### Prerequisites
-* Python 3.8+
-* Numpy, Biopython, Scipy
-* DSSP (for secondary structure assignment)
+```bash
+git clone https://github.com/JLU-WangXu/Structrace.git
+cd Structrace
+```
 
-# Clone the repository
-git clone [https://github.com/YourUsername/StrucTrace.git](https://github.com/YourUsername/StrucTrace.git)
-cd StrucTrace
+Create a Python environment and install the core Python dependencies used by the analysis scripts:
 
----
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install numpy pandas scipy biopython requests tqdm
+```
 
-## 📚 Citation
+Some validation workflows require external scientific software:
 
-If you use StrucTrace in your research, please cite our paper:
+- DSSP for secondary-structure assignment.
+- GROMACS 2024.6 for molecular dynamics validation.
+- Rosetta for folding-energy calculations.
+- Foldseek for fast reference retrieval in public provenance workflows.
+
+## Reproducibility
+
+The repository provides representative data and scripts for the major analyses described above:
+
+- High-capacity embedding: `High-density_embedding_stress_test/run_watermark_6iyc.py`
+- MD protocol: `Molecular_Dynamics_Validation/configs/protocol.md`
+- GROMACS parameter files: `Molecular_Dynamics_Validation/configs/`
+- Rosetta energy summaries: `Rosetta_energy/`
+- Example watermarked structures: `Watermark/2.Watermarked results/`
+
+## Citation
+
+If you use StrucTrace in academic work, please cite:
 
 ```bibtex
 @article{Wang2025StrucTrace,
-  title={StrucTrace: A universal Fourier watermark for traceable biomolecular structures},
-  author={Wang, Xu and Wang, Chi and Huang, Tin-Yeh and Wang, Yiquan and Yuan, Yafei},
-  journal={Nature Structural & Molecular Biology, Technical Report},
-  year={2025},
-  note={Under Review}
+  title   = {StrucTrace: A universal Fourier watermark for traceable biomolecular structures},
+  author  = {Wang, Xu and Wang, Chi and Huang, Tin-Yeh and Wang, Yiquan and Jiang, Siyuan and Yuan, Yafei},
+  year    = {2025},
+  note    = {Manuscript under review}
 }
-
 ```
 
----
+## Code Availability
 
-## 📄 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](https://www.google.com/search?q=LICENSE) file for details.
-
+The StrucTrace package and analysis scripts are provided for academic and noncommercial research use through this repository. For licensing, commercial use or controlled-access deployment, please contact the corresponding authors listed in the manuscript.

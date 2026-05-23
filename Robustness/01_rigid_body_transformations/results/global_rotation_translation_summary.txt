@@ -1,0 +1,3 @@
+6MRR: n=1183 BitAcc_min=100.000% BitAcc_max=100.000% exact=1183/1183
+8HFE: n=1183 BitAcc_min=100.000% BitAcc_max=100.000% exact=1183/1183
+8VC8: n=1183 BitAcc_min=100.000% BitAcc_max=100.000% exact=1183/1183

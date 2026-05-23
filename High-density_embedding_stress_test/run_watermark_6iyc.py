@@ -1,13 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-实验：将论文摘要嵌入 PDB (6iyc)
-
-本脚本将执行一个高级实验：
-1.  目标: 将一篇完整的论文摘要作为数字水印嵌入到 PDB 结构 `6iyc` 中。
-2.  方法: 使用基于 FFT 的算法，智能地选取 B-factor 最高的原子作为嵌入区域。
-3.  约束: 保持全局 CA-RMSD（均方根偏差）尽可能低，使其在结构上“不可见”。
-"""
-
 import numpy as np
 import math
 import os

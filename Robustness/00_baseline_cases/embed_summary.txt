@@ -1,0 +1,3 @@
+6MRR: output=G:\Watermarker\Attack\3cases\6MRR\6MRR_watermarked_npj_SB.pdb decoded_message='npj SB' BitAcc=100.000% exact=True global_CA_RMSD=0.003735757266 Å selected_CA_RMSD=0.004409585518 Å
+8HFE: output=G:\Watermarker\Attack\3cases\8HFE\8HFE_watermarked_npj_SB.pdb decoded_message='npj SB' BitAcc=100.000% exact=True global_CA_RMSD=0.001330440902 Å selected_CA_RMSD=0.004409585518 Å
+8VC8: output=G:\Watermarker\Attack\3cases\8VC8\8VC8_watermarked_npj_SB.pdb decoded_message='npj SB' BitAcc=100.000% exact=True global_CA_RMSD=0.002186715777 Å selected_CA_RMSD=0.004409585518 Å
