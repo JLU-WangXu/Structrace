@@ -4,9 +4,9 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
 [![GROMACS](https://img.shields.io/badge/GROMACS-2024.6-green.svg)](https://www.gromacs.org/)
 
-**Authors:** *Xu Wang*<sup>&dagger;,*</sup>, *Chi Wang*<sup>&dagger;</sup>, *Tin-Yeh Huang*, *Yiquan Wang*, *Yafei Yuan*<sup>*</sup>  
+**Authors:** <i>Xu Wang</i><sup>&dagger;,&#42;</sup>, <i>Chi Wang</i><sup>&dagger;</sup>, <i>Tin-Yeh Huang</i>, <i>Yiquan Wang</i>, <i>Yafei Yuan</i><sup>&#42;</sup>  
 <sup>&dagger;</sup>These authors contributed equally to this work.  
-<sup>*</sup>Corresponding authors.
+<sup>&#42;</sup>Corresponding authors.
 
 StrucTrace is a reference-guided Fourier-domain watermarking framework for traceable biomolecular structures. It embeds provenance payloads into flexible C-alpha coordinate regions as a post-processing step, preserving atomic-scale structural fidelity while enabling public provenance verification, hardware-bound access control and auditable digital-rights management.
 
