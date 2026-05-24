@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "structrace"
+version = "0.1.0"
+description = "Fourier-domain watermarking and safeguard tools for traceable biomolecular structures"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "Academic and noncommercial research use" }
+authors = [
+  { name = "StrucTrace authors" }
+]
+dependencies = [
+  "numpy>=1.22",
+  "cryptography>=41"
+]
+
+[project.scripts]
+structrace = "structrace.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/structrace"]
