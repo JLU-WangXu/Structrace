@@ -1,0 +1,38 @@
+[
+  {
+    "index": "1",
+    "timestamp_utc": "2026-05-23T00:00:00Z",
+    "asset_id": "StrucTrace-6IYC-abstract-watermark",
+    "event": "mint_asset_record",
+    "actor": "owner_lab",
+    "counterparty": "registry",
+    "permission": "provenance_registration",
+    "recorded_at_utc": "2026-05-23T17:03:47.599533+00:00",
+    "previous_hash": "GENESIS",
+    "record_hash": "c1f46df9b04de2f546128b64462e36e1e38aef94c65f1ab6ece31122e05deb13"
+  },
+  {
+    "index": "2",
+    "timestamp_utc": "2026-05-23T00:05:00Z",
+    "asset_id": "StrucTrace-6IYC-abstract-watermark",
+    "event": "grant_license",
+    "actor": "owner_lab",
+    "counterparty": "authorized_institute",
+    "permission": "view_and_verify",
+    "recorded_at_utc": "2026-05-23T17:03:47.600532+00:00",
+    "previous_hash": "c1f46df9b04de2f546128b64462e36e1e38aef94c65f1ab6ece31122e05deb13",
+    "record_hash": "bf31909de4df88dde3617ecfc963d26ff8d775ca4369a913e1ff40e0076fffe8"
+  },
+  {
+    "index": "3",
+    "timestamp_utc": "2026-05-23T00:10:00Z",
+    "asset_id": "StrucTrace-6IYC-abstract-watermark",
+    "event": "revoke_license",
+    "actor": "owner_lab",
+    "counterparty": "expired_client",
+    "permission": "access_revoked",
+    "recorded_at_utc": "2026-05-23T17:03:47.600532+00:00",
+    "previous_hash": "bf31909de4df88dde3617ecfc963d26ff8d775ca4369a913e1ff40e0076fffe8",
+    "record_hash": "77101bfe542692462d0a389b2c1cc0fe1a88efa211d9b56e7c2eb3061ba85052"
+  }
+]

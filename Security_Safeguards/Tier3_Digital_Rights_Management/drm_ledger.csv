@@ -1,0 +1,4 @@
+index,timestamp_utc,asset_id,event,actor,counterparty,permission,recorded_at_utc,previous_hash,record_hash
+1,2026-05-23T00:00:00Z,StrucTrace-6IYC-abstract-watermark,mint_asset_record,owner_lab,registry,provenance_registration,2026-05-23T17:03:47.599533+00:00,GENESIS,c1f46df9b04de2f546128b64462e36e1e38aef94c65f1ab6ece31122e05deb13
+2,2026-05-23T00:05:00Z,StrucTrace-6IYC-abstract-watermark,grant_license,owner_lab,authorized_institute,view_and_verify,2026-05-23T17:03:47.600532+00:00,c1f46df9b04de2f546128b64462e36e1e38aef94c65f1ab6ece31122e05deb13,bf31909de4df88dde3617ecfc963d26ff8d775ca4369a913e1ff40e0076fffe8
+3,2026-05-23T00:10:00Z,StrucTrace-6IYC-abstract-watermark,revoke_license,owner_lab,expired_client,access_revoked,2026-05-23T17:03:47.600532+00:00,bf31909de4df88dde3617ecfc963d26ff8d775ca4369a913e1ff40e0076fffe8,77101bfe542692462d0a389b2c1cc0fe1a88efa211d9b56e7c2eb3061ba85052

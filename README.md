@@ -63,7 +63,8 @@ The coordinate-level watermark is designed to operate within a broader security 
 
 ## Repository Contents
 
-- `Watermark/`: watermarking examples, preliminary validation structures and hardware-bound authentication materials.
+- `Robustness/`: robustness analyses and preliminary watermark-validation examples.
+- `Security_Safeguards/`: three-tier safeguard examples for public provenance, hardware-bound access and digital rights management.
 - `High-density_embedding_stress_test/`: scripts and structures for the gamma-secretase high-capacity embedding experiment.
 - `Molecular_Dynamics_Validation/`: molecular dynamics inputs, structures, trajectories and analysis outputs for 8HFE, 6MRR and 8VC8.
 - `Rosetta_energy/`: Rosetta energy outputs used for thermodynamic stability analysis.
@@ -101,7 +102,8 @@ The repository provides representative data and scripts for the major analyses d
 - MD protocol: `Molecular_Dynamics_Validation/configs/protocol.md`
 - GROMACS parameter files: `Molecular_Dynamics_Validation/configs/`
 - Rosetta energy summaries: `Rosetta_energy/`
-- Example watermarked structures: `Watermark/2.Watermarked results/`
+- Preliminary watermark examples: `Robustness/00_preliminary_watermark_validation/`
+- Three-tier security examples: `Security_Safeguards/`
 
 ## Citation
 
@@ -111,7 +113,7 @@ If you use StrucTrace in academic work, please cite:
 @article{Wang2025StrucTrace,
   title   = {StrucTrace: A universal Fourier watermark for traceable biomolecular structures},
   author  = {Wang, Xu and Wang, Chi and Huang, Tin-Yeh and Wang, Yiquan and Jiang, Siyuan and Yuan, Yafei},
-  year    = {2025},
+  year    = {2026},
   note    = {Manuscript under review}
 }
 ```
