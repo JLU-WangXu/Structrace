@@ -4,7 +4,7 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
 [![GROMACS](https://img.shields.io/badge/GROMACS-2024.6-green.svg)](https://www.gromacs.org/)
 
-**Authors:** Xu Wang<sup>&dagger;,*</sup>, Chi Wang<sup>&dagger;</sup>, Tin-Yeh Huang, Yiquan Wang, Yafei Yuan<sup>*</sup>  
+**Authors:** *Xu Wang*<sup>&dagger;,*</sup>, *Chi Wang*<sup>&dagger;</sup>, *Tin-Yeh Huang*, *Yiquan Wang*, *Yafei Yuan*<sup>*</sup>  
 <sup>&dagger;</sup>These authors contributed equally to this work.  
 <sup>*</sup>Corresponding authors.
 
