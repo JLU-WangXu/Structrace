@@ -4,7 +4,7 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
 [![GROMACS](https://img.shields.io/badge/GROMACS-2024.6-green.svg)](https://www.gromacs.org/)
 
-**Authors:** <i>Xu Wang</i><sup>&dagger;</sup>, <i>Chi Wang</i><sup>&dagger;</sup>, <i>Tin-Yeh Huang</i>, <i>Yiquan Wang</i>, <i>Siyuan Jiang</i>,<i>Yafei Yuan</i><sup>&#42;</sup>  
+**Authors:** <i>Xu Wang</i><sup>&dagger;</sup>, <i>Chi Wang</i><sup>&dagger;</sup>, <i>Tin-Yeh Huang</i>, <i>Yiquan Wang</i>, <i>Siyuan Jiang</i>, <i>Yafei Yuan</i><sup>&#42;</sup>  
 <sup>&dagger;</sup>These authors contributed equally to this work.  
 <sup>&#42;</sup>Corresponding authors.
 
@@ -149,7 +149,7 @@ print(decode_result.decoded_text, decode_result.bit_accuracy, decode_result.exac
 @article{Wang2026StrucTrace,
   title  = {StrucTrace: A Universal Fourier Watermark for Traceable Biomolecular Structures},
   author = {Wang, Xu and Wang, Chi and Huang, Tin-Yeh and Wang, Yiquan and Jiang, Siyuan and Yuan, Yafei},
-  journal = {npj Structural Biology},
+  journal = {npj structural biology},
   year   = {2026},
   note   = {Accepted}
 }
