@@ -17,6 +17,9 @@ from .pdb import (
     write_pdb_lines,
 )
 
+PAYLOAD_BITS_REMARK = "REMARK STRUCTRACE_PAYLOAD_BITS"
+PAYLOAD_FORMAT_REMARK = "REMARK STRUCTRACE_PAYLOAD_FORMAT UTF-8-TEXT-NULL"
+
 
 @dataclass(frozen=True)
 class EmbedResult:
@@ -99,14 +102,20 @@ def embed_text(
     strength: float = 0.02,
     minimum_top_n: int = 35,
 ) -> EmbedResult:
-    return embed_bits(
+    bits = text_to_bits(text, add_null=add_null)
+    result = embed_bits(
         input_pdb,
-        text_to_bits(text, add_null=add_null),
+        bits,
         output_pdb,
         start_freq=start_freq,
         strength=strength,
         minimum_top_n=minimum_top_n,
     )
+    lines = read_pdb_lines(output_pdb)
+    metadata = [f"{PAYLOAD_BITS_REMARK} {len(bits)}\n", f"{PAYLOAD_FORMAT_REMARK}\n"]
+    lines = [line for line in lines if not line.startswith(PAYLOAD_BITS_REMARK) and not line.startswith(PAYLOAD_FORMAT_REMARK)]
+    write_pdb_lines(output_pdb, metadata + lines)
+    return result
 
 
 def decode_bits(
@@ -162,15 +171,32 @@ def decode_bits(
     )
 
 
+def _read_payload_bit_length(query_pdb: Union[str, Path]) -> Optional[int]:
+    for line in read_pdb_lines(query_pdb):
+        if line.startswith(PAYLOAD_BITS_REMARK):
+            try:
+                return int(line.split()[-1])
+            except (ValueError, IndexError):
+                raise ValueError(f"Invalid StrucTrace payload-length remark in {query_pdb}.")
+    return None
+
+
 def decode_text(
     master_pdb: Union[str, Path],
     query_pdb: Union[str, Path],
-    bit_length: int,
+    bit_length: Optional[int] = None,
     *,
     expected_text: Optional[str] = None,
     start_freq: int = 5,
     minimum_top_n: int = 35,
+    max_bits: Optional[int] = None,
 ) -> DecodeResult:
+    if bit_length is None:
+        bit_length = _read_payload_bit_length(query_pdb)
+        if bit_length is None:
+            raise ValueError("Missing StrucTrace payload-length metadata. Provide bit_length for legacy watermarked files.")
+        if max_bits is not None:
+            bit_length = min(bit_length, max_bits)
     expected_bits = text_to_bits(expected_text) if expected_text is not None else None
     return decode_bits(
         master_pdb,

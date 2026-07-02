@@ -3,18 +3,14 @@
 from .watermark import (
     DecodeResult,
     EmbedResult,
-    decode_bits,
     decode_text,
-    embed_bits,
     embed_text,
 )
 
 __all__ = [
     "DecodeResult",
     "EmbedResult",
-    "decode_bits",
     "decode_text",
-    "embed_bits",
     "embed_text",
 ]
 

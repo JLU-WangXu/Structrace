@@ -1,6 +1,5 @@
 # StrucTrace: A Universal Fourier Watermark for Traceable Biomolecular Structures
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
 [![GROMACS](https://img.shields.io/badge/GROMACS-2024.6-green.svg)](https://www.gromacs.org/)
 
@@ -42,7 +41,13 @@ StrucTrace is a reference-guided Fourier-domain watermarking framework for trace
 
 ## Install
 
-Clone and install the package in editable mode:
+After PyPI publication, install StrucTrace with:
+
+```bash
+pip install structrace
+```
+
+For local development, clone and install the package in editable mode:
 
 ```bash
 git clone https://github.com/JLU-WangXu/Structrace.git
@@ -64,73 +69,71 @@ structrace --help
 
 External software used for manuscript validation includes DSSP, GROMACS 2024.6, Rosetta and Foldseek.
 
+## Publishing
+
+Build and validate the package locally:
+
+```bash
+python -m pip install --upgrade build twine
+python -m build
+python -m twine check dist/*
+```
+
+Upload to TestPyPI first:
+
+```bash
+python -m twine upload --repository testpypi dist/*
+```
+
+If the TestPyPI package installs and imports correctly, upload the same version to PyPI:
+
+```bash
+python -m twine upload dist/*
+```
+
 ## Quick Start
 
 ### CLI
 
-Embed and decode a text payload:
+Embed a text watermark into a structure:
 
 ```bash
 python -m structrace embed Robustness/00_baseline_cases/6MRR/6MRR_original.pdb \
   --text "npj SB" \
   -o tmp/6MRR_watermarked.pdb
-
-python -m structrace decode Robustness/00_baseline_cases/6MRR/6MRR_original.pdb \
-  tmp/6MRR_watermarked.pdb \
-  --bits 56 \
-  --expected-text "npj SB"
 ```
 
-Run simple perturbations:
+Decode the watermark from the original and watermarked structures:
 
 ```bash
-python -m structrace attack round tmp/6MRR_watermarked.pdb --decimals 3 -o tmp/6MRR_round3.pdb
-python -m structrace attack translate tmp/6MRR_watermarked.pdb --vector 10 0 0 -o tmp/6MRR_tx10.pdb
-python -m structrace attack noise tmp/6MRR_watermarked.pdb --sigma 0.001 --seed 1 -o tmp/6MRR_noise.pdb
+python -m structrace decode Robustness/00_baseline_cases/6MRR/6MRR_original.pdb \
+  tmp/6MRR_watermarked.pdb \
+  --bits 56
 ```
+
+The `--bits` option can be set explicitly. If it is omitted, the CLI decodes 4 bits by default.
 
 ### Python API
 
 ```python
-from structrace.watermark import embed_text, decode_text
-from structrace.watermark.payload import text_to_bits
+from structrace.watermark import decode_text, embed_text
 
 master = "Robustness/00_baseline_cases/6MRR/6MRR_original.pdb"
 query = "tmp/6MRR_watermarked.pdb"
 
 embed_result = embed_text(master, "npj SB", query)
-decode_result = decode_text(master, query, len(text_to_bits("npj SB")), expected_text="npj SB")
+decode_result = decode_text(master, query)
 
 print(embed_result.global_ca_rmsd)
-print(decode_result.decoded_text, decode_result.bit_accuracy, decode_result.exact_recovery)
+print(decode_result.decoded_text)
 ```
 
 ## Package Functions
 
 ### Watermarking
 
-- `embed_bits(input_pdb, bits, output_pdb)`: embed a binary payload into a PDB file.
 - `embed_text(input_pdb, text, output_pdb)`: encode UTF-8 text as bits and embed it.
-- `decode_bits(master_pdb, query_pdb, bit_length)`: recover bits by reference-guided decoding.
-- `decode_text(master_pdb, query_pdb, bit_length)`: recover and decode a UTF-8 payload.
-- `text_to_bits(text)`, `bits_to_text(bits)`: payload conversion helpers.
-
-### Robustness
-
-- `round_pdb_coordinates(input_pdb, output_pdb, decimals)`: coordinate precision attack.
-- `translate_pdb(input_pdb, output_pdb, vector)`: rigid-body translation.
-- `add_gaussian_noise_to_atoms(input_pdb, output_pdb, sigma, seed)`: stochastic coordinate noise.
-- `rmsd(a, b)`, `bit_accuracy(expected, decoded)`, `bit_error_rate(expected, decoded)`: analysis metrics.
-
-### Security Safeguards
-
-- `build_public_registry(records, output_csv)`: create Tier 1 provenance records.
-- `verify_public_registry(registry_csv)`: verify registered query hashes.
-- `machine_fingerprint()`: derive a local machine fingerprint.
-- `encrypt_file(input_path, output_path, machine_id=None)`: Tier 2 encrypted asset generation.
-- `decrypt_file(input_path, output_path, machine_id=None)`: hardware-bound decryption.
-- `audit_artifacts(paths, output_csv=None)`: hash and size audit for protected assets.
-- `LedgerEvent(...)`, `build_ledger(events, output_json, output_csv)`, `verify_ledger(ledger_json)`: Tier 3 DRM ledger utilities.
+- `decode_text(master_pdb, query_pdb)`: recover the embedded UTF-8 text watermark from the original and watermarked structures.
 
 ## Repository Map
 

@@ -5,20 +5,71 @@ build-backend = "hatchling.build"
 [project]
 name = "structrace"
 version = "0.1.0"
-description = "Fourier-domain watermarking and safeguard tools for traceable biomolecular structures"
-readme = "README.md"
+description = "Fourier-domain text watermarking for traceable biomolecular structures"
+readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.8"
-license = { text = "Academic and noncommercial research use" }
+license = { file = "LICENSE" }
 authors = [
-  { name = "StrucTrace authors" }
+  { name = "Xu Wang" },
+  { name = "Chi Wang" },
+  { name = "Tin-Yeh Huang" },
+  { name = "Yiquan Wang" },
+  { name = "Siyuan Jiang" },
+  { name = "Yafei Yuan" }
+]
+maintainers = [
+  { name = "Xu Wang" }
+]
+keywords = [
+  "biomolecular-structures",
+  "pdb",
+  "protein",
+  "watermarking",
+  "structural-biology"
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: Other/Proprietary License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Bio-Informatics"
 ]
 dependencies = [
-  "numpy>=1.22",
-  "cryptography>=41"
+  "numpy>=1.22,<2",
 ]
+
+[project.urls]
+Homepage = "https://github.com/JLU-WangXu/Structrace"
+Repository = "https://github.com/JLU-WangXu/Structrace"
+Issues = "https://github.com/JLU-WangXu/Structrace/issues"
 
 [project.scripts]
 structrace = "structrace.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/structrace"]
+only-include = [
+  "src/structrace/__init__.py",
+  "src/structrace/__main__.py",
+  "src/structrace/cli.py",
+  "src/structrace/watermark"
+]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "src/structrace/__init__.py",
+  "src/structrace/__main__.py",
+  "src/structrace/cli.py",
+  "src/structrace/watermark",
+  "tests",
+  "README.md",
+  "LICENSE",
+  "pyproject.toml"
+]
