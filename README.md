@@ -1,6 +1,7 @@
 # StrucTrace: A Universal Fourier Watermark for Traceable Biomolecular Structures
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
+[![PyPI](https://img.shields.io/pypi/v/structrace.svg)](https://pypi.org/project/structrace/)
 [![GROMACS](https://img.shields.io/badge/GROMACS-2024.6-green.svg)](https://www.gromacs.org/)
 
 **Authors:** <i>Xu Wang</i><sup>&dagger;</sup>, <i>Chi Wang</i><sup>&dagger;</sup>, <i>Tin-Yeh Huang</i>, <i>Yiquan Wang</i>, <i>Siyuan Jiang</i>, <i>Yafei Yuan</i><sup>&#42;</sup>  
@@ -8,6 +9,152 @@
 <sup>&#42;</sup>Corresponding authors.
 
 StrucTrace is a reference-guided Fourier-domain watermarking framework for traceable biomolecular structures. It embeds provenance payloads into flexible C-alpha coordinate regions as a post-processing step, preserving atomic-scale structural fidelity while enabling public provenance verification, hardware-bound access control and auditable digital-rights management.
+
+## Install
+
+Install the released package from PyPI:
+
+```bash
+pip install structrace
+```
+
+For local development, clone the repository and install in editable mode:
+
+```bash
+git clone https://github.com/JLU-WangXu/Structrace.git
+cd Structrace
+pip install -e .
+```
+
+Check the command-line interface:
+
+```bash
+python -m structrace --help
+```
+
+## Quick Start
+
+### Add a watermark
+
+```bash
+python -m structrace embed input.pdb \
+  --text "07022026CHIWANGTEST" \
+  -o input_watermarked.pdb
+```
+
+This creates a new PDB file and leaves the original structure unchanged. The embedded text can contain English, Chinese, numbers and common symbols because StrucTrace encodes text as UTF-8 bytes.
+
+### Decode a watermark
+
+Decoding is reference-guided: provide the original structure and the watermarked structure.
+
+```bash
+python -m structrace decode input.pdb input_watermarked.pdb --bits 160
+```
+
+For the example text `07022026CHIWANGTEST`, use `160` bits because the payload has 19 ASCII characters plus the default null terminator:
+
+```text
+(19 + 1) * 8 = 160 bits
+```
+
+If `--bits` is omitted, the CLI decodes 4 bits by default. This is useful for quick bit-level inspection, but full text recovery should use the correct payload bit length.
+
+### Python API
+
+```python
+from structrace.watermark import decode_text, embed_text
+
+input_pdb = "input.pdb"
+watermarked_pdb = "input_watermarked.pdb"
+payload = "07022026CHIWANGTEST"
+
+embed_result = embed_text(input_pdb, payload, watermarked_pdb)
+decode_result = decode_text(input_pdb, watermarked_pdb)
+
+print(embed_result.global_ca_rmsd)
+print(decode_result.decoded_text)
+```
+
+The Python API writes StrucTrace payload-length metadata into the watermarked PDB and can usually recover the full text with `decode_text(input_pdb, watermarked_pdb)`. For legacy files or manually controlled decoding, pass an explicit bit length:
+
+```python
+decode_result = decode_text(input_pdb, watermarked_pdb, bit_length=160)
+```
+
+## Usage Guidance
+
+### Choosing watermark text
+
+- Use short identifiers for routine provenance, such as dates, lab IDs, manuscript IDs or accession tags.
+- Prefer stable payloads such as `07022026CHIWANGTEST`, `LAB_ASSET_0001` or `project:sample:version`.
+- Chinese text is supported, but it uses more bits because UTF-8 Chinese characters usually require 3 bytes, or 24 bits, per character.
+- Avoid very long text for small proteins. Longer payloads require more selected C-alpha atoms.
+
+### Calculating `--bits`
+
+The CLI `decode` command needs the payload bit length for full recovery:
+
+```text
+bits = (len(payload.encode("utf-8")) + 1) * 8
+```
+
+The extra `+ 1` is the null terminator added by `embed_text()`.
+
+Examples:
+
+```text
+"npj SB"                  -> (6 + 1) * 8  = 56 bits
+"07022026CHIWANGTEST"    -> (19 + 1) * 8 = 160 bits
+"zhongwen"               -> (8 + 1) * 8  = 72 bits
+```
+
+You can calculate it in Python:
+
+```bash
+python -c "s='07022026CHIWANGTEST'; print((len(s.encode('utf-8')) + 1) * 8)"
+```
+
+### Recommended structure inputs
+
+- Use PDB files containing protein `ATOM` records with C-alpha (`CA`) atoms.
+- Keep residue numbering, chain IDs and C-alpha records consistent between the original and watermarked files.
+- Decode against the exact original structure used for embedding.
+- Multi-chain protein structures are supported if the PDB keeps standard chain and residue fields.
+- Structures with more C-alpha atoms can carry longer payloads more comfortably.
+
+### Output interpretation
+
+`embed` prints metrics such as:
+
+- `bit_length`: number of embedded payload bits.
+- `top_n_selected_ca`: number of selected C-alpha atoms used by the Fourier embedding.
+- `global_ca_rmsd`: global C-alpha RMSD between original and watermarked structures.
+- `selected_ca_rmsd`: RMSD on selected C-alpha atoms.
+- `max_selected_ca_displacement`: largest selected-atom displacement.
+
+For a successful text decode, check:
+
+```json
+"decoded_text": "your payload"
+```
+
+If `--expected-text` is supplied, the output also reports `bit_accuracy` and `exact_recovery`.
+
+```bash
+python -m structrace decode input.pdb input_watermarked.pdb \
+  --bits 160 \
+  --expected-text "07022026CHIWANGTEST"
+```
+
+### Practical recommendations
+
+- Keep an archived copy of the original PDB. Decoding is reference-guided and needs the original structure.
+- Use explicit `--bits` for CLI text recovery.
+- For public examples, use short ASCII payloads so readers can reproduce the result easily.
+- For non-English payloads, compute `--bits` using UTF-8 byte length, not character count.
+- Do not edit residue IDs, chain IDs or C-alpha coordinates by unrelated tools before decoding.
+- Standard PDB coordinate precision is supported by the workflow, but aggressive coordinate noise, atom deletion or residue renumbering can reduce recovery accuracy.
 
 ## Key Results
 
@@ -39,94 +186,11 @@ StrucTrace is a reference-guided Fourier-domain watermarking framework for trace
 
 **Figure 5. Three-tier safeguards.** Tier 1 provides public provenance verification, Tier 2 provides hardware-bound encrypted access, and Tier 3 provides auditable digital-rights management.
 
-## Install
-
-After PyPI publication, install StrucTrace with:
-
-```bash
-pip install structrace
-```
-
-For local development, clone and install the package in editable mode:
-
-```bash
-git clone https://github.com/JLU-WangXu/Structrace.git
-cd Structrace
-pip install -e .
-```
-
-The command-line interface is then available as:
-
-```bash
-python -m structrace --help
-```
-
-If your Python scripts directory is on `PATH`, you can also use:
-
-```bash
-structrace --help
-```
-
 External software used for manuscript validation includes DSSP, GROMACS 2024.6, Rosetta and Foldseek.
 
 ## Publishing
 
-Build and validate the package locally:
-
-```bash
-python -m pip install --upgrade build twine
-python -m build
-python -m twine check dist/*
-```
-
-Upload to TestPyPI first:
-
-```bash
-python -m twine upload --repository testpypi dist/*
-```
-
-If the TestPyPI package installs and imports correctly, upload the same version to PyPI:
-
-```bash
-python -m twine upload dist/*
-```
-
-## Quick Start
-
-### CLI
-
-Embed a text watermark into a structure:
-
-```bash
-python -m structrace embed Robustness/00_baseline_cases/6MRR/6MRR_original.pdb \
-  --text "npj SB" \
-  -o tmp/6MRR_watermarked.pdb
-```
-
-Decode the watermark from the original and watermarked structures:
-
-```bash
-python -m structrace decode Robustness/00_baseline_cases/6MRR/6MRR_original.pdb \
-  tmp/6MRR_watermarked.pdb \
-  --bits 56
-```
-
-The `--bits` option can be set explicitly. If it is omitted, the CLI decodes 4 bits by default.
-
-### Python API
-
-```python
-from structrace.watermark import decode_text, embed_text
-
-master = "Robustness/00_baseline_cases/6MRR/6MRR_original.pdb"
-query = "tmp/6MRR_watermarked.pdb"
-
-embed_result = embed_text(master, "npj SB", query)
-decode_result = decode_text(master, query)
-
-print(embed_result.global_ca_rmsd)
-print(decode_result.decoded_text)
-```
+See [docs/PYPI_RELEASE.md](docs/PYPI_RELEASE.md) for the package release checklist.
 
 ## Package Functions
 

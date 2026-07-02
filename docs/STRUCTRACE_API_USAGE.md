@@ -62,7 +62,7 @@ python -m structrace embed input.pdb \
 ### Decode a watermark
 
 ```bash
-python -m structrace decode input.pdb input_watermarked.pdb --bits 152
+python -m structrace decode input.pdb input_watermarked.pdb --bits 160
 ```
 
 The `--bits` option can be set explicitly. If it is omitted, the CLI decodes 4 bits by default.
